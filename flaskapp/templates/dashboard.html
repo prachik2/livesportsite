@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+	{% block title %}
+		Dashboard 
+	{% endblock %}
+		
+	{% block content %}
+		<h1>Order Details</h1>
+		<form action= "{% url 'dashboard'%}" method="get" id="">
+			<label for="">Ordering By </label>
+			<select name="sort_dropdown">
+				<option value="" />Select </option>
+				<option value="order_status" />Order Status</option>
+				<option value="product_name" />Product Name</option>
+			</select>
+			<button type="submit" value="Submit">Search</button>
+		</form>
+		
+		<table border = 1> 
+			<tr>
+				<th>Order Id </th>
+				<th>Product Name</th>
+				<th>Order Status</th>
+				<th>Product URL</th> 
+				<th>Cost Price</th>
+			</tr>
+			{% for order in order_list %} 
+				<tr> 
+					<td>{{order.order_id}}</td>
+					<td>{{order.product_name}}</td>
+					<td>{{order.order_status}}</td>
+					<td>{{order.product_url}}</td>
+					<td>{{order.cost_price}}</td>				
+				</tr>
+			{% endfor %}
+		</table>
+	{% endblock%}

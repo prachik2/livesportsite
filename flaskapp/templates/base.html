@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			{% block title %}
+				Live Your Sports
+			{% endblock%}
+		</title>
+	</head>
+	<body>
+		<div id="content">
+			{% block content %}
+				{% if user.is_authenticated %}
+	    			<h2>Welcome,{{request.user.first_name}}</h2>
+					<a href = "">Home</a></br>
+					<a href = "{% url 'create_order' %}">Create New Order</a></br>
+					<a href = "{% url 'dashboard' %}">Order List</a></br>
+					
+					<p> User {{request.user.first_name}}, Signed In Successfully</br>
+					If you want to sign Out this page click...
+					<a href = "{% url 'logout_page' %}">Logout</a></br></p>
+				{% else %}
+					<p>Welcome, New User Please log in...</p>
+					<p><a href = "{% url 'create_account' %}">Create Account</a></p>
+					<p><a href = "{% url 'login' %}">Log In </a></p>
+				{% endif %}
+			{% endblock %}
+		</div>
+	</body>
+</html>
