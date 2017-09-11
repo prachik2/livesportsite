@@ -6,7 +6,6 @@
 	{% block content %}
 		<h1>Create Account</h1>
 		<h5> Welcome to Live Your Sports</h5>
-
 		<form action="" method="POST" id="userform" name = 'createaccount'>{% csrf_token %}
 			{{ create_account_form.as_p }}
 		<button type="submit"  form="userform" value="Submit">Submit</button>

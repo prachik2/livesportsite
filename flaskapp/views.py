@@ -28,24 +28,26 @@ def create_account(request,template_name = "create_account.html"):
 		create_account_form = CreateAccountForm()
 	return render(request, 'create_account.html', {'create_account_form': create_account_form})
 
+
 def login_page(request):
+	#import pdb; pdb.set_trace();
 	if request.user.is_authenticated():
 		print "user is  Authenticated"
 		return HttpResponseRedirect(reverse('base'))
 
 	if request.method == "POST":
-		#import pdb; pdb.set_trace();
+
 		login_form = LogInForm(request.POST)
-		print login_form
 		if login_form.is_valid():
 			cleaned_data = login_form.cleaned_data
-			username= cleaned_data['user_name']
-			password= cleaned_data['pass_word']
+			user_name= cleaned_data['username']
+			pass_word= cleaned_data['password']
 			
-			user = authenticate(username=username, password=password)
+			user = authenticate(username=user_name, password=pass_word)
 			if user is not None:
 				login(request, user)
-				return HttpResponseRedirect(reverse('base'))
+				print user
+				return HttpResponseRedirect(reverse('dashboard'))
 	else:
 		login_form = LogInForm()
 	return render(request, 'login.html', {'login_form': login_form})
@@ -70,20 +72,19 @@ def create_order_details(request,template_name ='create_order.html'):
 		order_form = OrderDetailForm(request.POST)
 		if order_form.is_valid():
 			cleaned_data = order_form.cleaned_data
-			#order_id = cleaned_data['order_id']
+			order_id = cleaned_data['order_id']
 			product_name = cleaned_data['product_name']
 			order_status = cleaned_data['order_status']
 			product_url = cleaned_data['product_url']
 			cost_price = cleaned_data['cost_price']
 			
-			detail = Order.objects.create(product_name=product_name,order_status=order_status,product_url=product_url,cost_price=cost_price)
+			detail = Order.objects.create(order_id=order_id,product_name=product_name,order_status=order_status,product_url=product_url,cost_price=cost_price)
 			detail.save()
 			return HttpResponseRedirect(reverse('dashboard'))
 	else :
 		order_form = OrderDetailForm()
 		print 'Details not updated!!'
 	return render_to_response(template_name,{'order_form':order_form},RequestContext(request))	
-
 
 def base(request,template_name = 'base.html'):
 	message = 'You searched for: %s' % request
@@ -92,5 +93,5 @@ def base(request,template_name = 'base.html'):
 
 def logout_page(request):
 	logout(request)
-	return HttpResponseRedirect(reverse('login'))
+	return HttpResponseRedirect(reverse('base'))
 

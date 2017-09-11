@@ -25,12 +25,17 @@ class Order(models.Model):
 	procurement_date = models.DateTimeField(auto_now_add=True, null=True)
 	supplier = models.CharField(max_length =50)
 	package_id = models.CharField(max_length = 30)
-	consolidation_id = models.CharField(max_length=30 ,null=True)
+	#consolidation_id = models.CharField(max_length=50 , null=True)
 	usa_tracking = models.CharField(max_length = 255)
 	tracking_number = models.CharField(max_length =30)
 	cost_price = models.CharField(max_length =10)	
 	comments = models.CharField(max_length = 50)
 	edit_log = models.CharField(max_length =20)
-	# def order_id_required(self):
-	# 	if order_id in Order.objects.values_list('name',flat = True):
-	# 		return order_id.clean('')
+	
+
+	
+	def __unicode__(self):
+		#return consolidation_id
+	# def consolidation_id_decode(self):
+	 	if consolidation_id in Order.objects.values_list('consolidation_id',flat = True):
+	 		return u'%s' % (self.consolidation_id.encode('ascii','ignore'))

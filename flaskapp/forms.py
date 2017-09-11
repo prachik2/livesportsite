@@ -20,13 +20,14 @@ class CreateAccountForm(forms.Form):
 			raise forms.ValidationError("Email already exists. Enter another Valid Email")
 		return email
 
+
 class LogInForm(forms.Form):
-	user_name = forms.CharField()
-	pass_word = forms.CharField(widget=forms.PasswordInput)
+	username = forms.CharField()
+	password = forms.CharField(widget=forms.PasswordInput)
 
 	def clean_username(self):
 		cleaned_data = self.cleaned_data
-		username = cleaned_data.get('user_name')
+		username = cleaned_data.get('username')
 		if not User.objects.filter(username=username):
 			raise forms.ValidationError('User is not Registered.\n Try again')
 		return username
@@ -42,7 +43,7 @@ class LogInForm(forms.Form):
 		return password
 
 class OrderDetailForm(forms.Form):
-	#order_id = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Order id'}))
+	order_id = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Order id'}))
 	product_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Product Name'}))
 	order_status = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Order status'}))
 	product_url = forms.URLField(widget=forms.TextInput(attrs={'placeholder': 'Enter Product URL'}))
