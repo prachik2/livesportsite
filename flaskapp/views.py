@@ -21,7 +21,7 @@ def create_account(request,template_name = "create_account.html"):
 			email = cleaned_data['email']
 			password = cleaned_data['password']
 			
-			user_object = User.objects.create(username = username,email = email, password = password)
+			user_object = User.objects.create_user(username = username,email = email, password = password)
 			print  'Successfully user created '
 			return HttpResponseRedirect(reverse('dashboard'))
 	else:
@@ -46,7 +46,6 @@ def login_page(request):
 			user = authenticate(username=user_name, password=pass_word)
 			if user is not None:
 				login(request, user)
-				print user
 				return HttpResponseRedirect(reverse('dashboard'))
 	else:
 		login_form = LogInForm()

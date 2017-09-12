@@ -27,15 +27,15 @@ class LogInForm(forms.Form):
 
 	def clean_username(self):
 		cleaned_data = self.cleaned_data
-		username = cleaned_data.get('username')
-		if not User.objects.filter(username=username):
+		user_name = cleaned_data.get('username')
+		if not User.objects.filter(username=user_name):
 			raise forms.ValidationError('User is not Registered.\n Try again')
-		return username
+		return user_name
 
 	def clean_password(self):
 		cleaned_data = self.cleaned_data
-		username = cleaned_data.get('user_name')
-		password = cleaned_data.get('pass_word')
+		username = cleaned_data.get('username')
+		password = cleaned_data.get('password')
 		user = User.objects.filter(username = username) 
 		if user.exists() and not user[0].check_password(password):
 			print "you entered wrong password."
@@ -49,11 +49,8 @@ class OrderDetailForm(forms.Form):
 	product_url = forms.URLField(widget=forms.TextInput(attrs={'placeholder': 'Enter Product URL'}))
 	cost_price = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Cost Price'}))
 
-	# def clean_order_id(self):
-	# 	cleaned_data = self.cleaned_data
-	# 	order_id = cleaned_data.get('order_id')
-	# 	product_name = cleaned_data.get('product_name')
-	# 	if order_id and product_name:
-	# 		if Order.objects.filter(order_id=order_id).exists():
-	# 			raise forms.ValidationError("Order id already exists")
-	# 		return order_id
+	# def clean_cost_price(dollars):
+	# 	cost_price = round(float(cost_price), 2)
+	# 	return "$%s%s" % (intcomma(int(cost_price)), ("%0.2f" % cost_price)[-3:])
+
+	

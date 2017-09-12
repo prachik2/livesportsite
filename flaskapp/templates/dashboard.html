@@ -5,31 +5,33 @@
 	{% endblock %}
 		
 	{% block content %}
-		<h1>Order Details</h1>
+		<h2>Order Details</h2>
+		<p><a href = "{% url 'base' %}">Home Page</a></p>
 		<form action= "{% url 'dashboard'%}" method="get" id="">
 			<label for="">Ordering By </label>
 			<select name="sort_dropdown">
 				<option value="order_status" />Order Status</option>
 			</select>
-			<button type="submit" value="Submit">Search</button>
+			<button type="submit" class="btn btn-primary" value="Submit">Search</button>
 		</form>
-		
-		<table border = 1> 
-			<tr>
-				<th>Order Id </th>
-				<th>Product Name</th>
-				<th>Order Status</th>
-				<th>Product URL</th> 
-				<th>Cost Price</th>
-			</tr>
-			{% for order in order_list %} 
-				<tr> 
-					<td>{{order.order_id}}</td>
-					<td>{{order.product_name}}</td>
-					<td>{{order.order_status}}</td>
-					<td>{{order.product_url}}</td>
-					<td>{{order.cost_price}}</td>				
+		<div class = "container">
+			<table class="table table-bordered"> 
+				<tr>
+					<th>Order Id </th>
+					<th>Product Name</th>
+					<th>Order Status</th>
+					<th>Product URL</th> 
+					<th>Cost Price</th>
 				</tr>
-			{% endfor %}
-		</table>
+				{% for order in order_list %} 
+					<tr> 
+						<td>{{order.order_id}}</td>
+						<td>{{order.product_name}}</td>
+						<td>{{order.order_status}}</td>
+						<td>{{order.product_url}}</td>
+						<td>{{order.cost_price}}</td>				
+					</tr>
+				{% endfor %}
+			</table>
+		</div>>
 	{% endblock%}

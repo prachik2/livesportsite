@@ -8,6 +8,6 @@
 	<h3>Create Order</h3>
 	<form action="" method="POST" id="orderform">{% csrf_token %}
 		{{ order_form.as_p }}
-		<button type="submit" form="orderform" value="Submit">Submit</button>
+		<button type="submit" class="btn btn-primary" form="orderform" value="Submit">Submit</button>
 	</form>
 {% endblock %}

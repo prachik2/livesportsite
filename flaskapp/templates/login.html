@@ -5,9 +5,9 @@
 
 	{% block content %}
 		<h1>Log In</h1>
-		<h3>Customer Details</h3>
+		
 		<form action="" method="POST" id="login" name = 'login_name'>{% csrf_token %}
 			{{ login_form.as_p }}
-			<button type="submit" form="login" value="Submit">Submit</button>
+			<button type="submit" class="btn btn-primary" form="login" value="Submit">Submit</button>
 		</form>
 	{% endblock %}
